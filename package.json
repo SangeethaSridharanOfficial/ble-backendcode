@@ -1,0 +1,27 @@
+{
+  "name": "azurebackend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@azure/storage-blob": "^12.4.0",
+    "azure-iothub": "^1.13.1",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "express-validator": "^6.9.2",
+    "heroku": "^7.47.12",
+    "joi": "^13.1.0",
+    "joy": "^0.1.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.11.15",
+    "redux-devtools-extension": "^2.13.8",
+    "tedious": "^9.2.3"
+  }
+}

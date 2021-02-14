@@ -1,0 +1,16 @@
+Get http://127.0.0.1:5000/roomlatestitem/
+
+### Post setpoints
+Put http://127.0.0.1:5000/roomlatestitem/
+
+### Get a room by id
+Get http://127.0.0.1:5000/roomlatestitem/id
+
+### Update a room by id
+PUT http://127.0.0.1:5000/roomlatestitem/1
+
+### Delete a room by id
+DELETE http://127.0.0.1:5000/roomlatestitem/id
+
+### Get all items
+Get http://127.0.0.1:5000/roomallitems/
