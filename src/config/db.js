@@ -1,7 +1,8 @@
 const mongoose = require("mongoose");
-const MONGOURI = "mongodb+srv://humber:Humber2@cluster0.ahcoq.mongodb.net/<dbname>?retryWrites=true&w=majority";
+// const MONGOURI = "mongodb+srv://humber:Humber2@cluster0.ahcoq.mongodb.net/<dbname>?retryWrites=true&w=majority";
 //const MONGOURI = "mongodb+srv://sheridan:Sheridan1!@cluster0.27ttm.mongodb.net/<dbname>?retryWrites=true&w=majority";
-
+const MONGOURI = "mongodb://localhost:27017/myFirstDB";
+// mongod --bind_ip_all
 const InitiateMongoServer = async() => {
     try {
         await mongoose.connect(MONGOURI, {
