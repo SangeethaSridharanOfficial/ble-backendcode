@@ -5,7 +5,8 @@ const MONGOURI = "mongodb+srv://humber:Humber2@cluster0.ahcoq.mongodb.net/BLE_DB
 // mongod --bind_ip_all
 class InitiateMongoServer{ 
     constructor(){
-        this.mongoose = this.createMongoose()
+        this.mongoose = this.createMongoose();
+        this.DeviceSchema = this.deviceSchema();
     }
 
     async createMongoose(){
@@ -28,11 +29,10 @@ class InitiateMongoServer{
     }
 
     deviceSchema(){
-        // Define schema
         var Schema = mongoose.Schema;
 
         var deviceSchema = new Schema({
-            id: String,
+            _id: String,
             name: String
         });
 
@@ -42,13 +42,3 @@ class InitiateMongoServer{
 };
 
 module.exports = new InitiateMongoServer();
-
-
-// const MongoClient = require('mongodb').MongoClient;
-// const uri = "mongodb+srv://karan_gajjar:<password>@cluster0.3ysot.mongodb.net/<dbname>?retryWrites=true&w=majority";
-// const client = new MongoClient(uri, { useNewUrlParser: true });
-// client.connect(err => {
-//     const collection = client.db("test").collection("devices");
-//     // perform actions on the collection object
-//     client.close();
-// });

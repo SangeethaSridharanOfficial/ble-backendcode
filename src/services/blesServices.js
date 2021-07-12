@@ -3,10 +3,9 @@ const { basicInfo } = require('../config/dbMethods');
 
 const saveBasicBleInfo = (reqData) => {
     try{
-        console.log('ble ', reqData);
         basicInfo({
-            id: reqData.dId,
-            name: reqData.dName
+            '_id': reqData.dId,
+            'name': reqData.dName
         });
     }catch(err){
         console.error('Error in saveBasicBleInfo ', err.stack);
