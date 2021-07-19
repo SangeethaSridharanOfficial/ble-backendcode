@@ -1,3 +1,5 @@
+const mongoose = require("mongoose");
+
 var BLESensorSchema = {
     _id: String,
     name: String,
@@ -7,4 +9,4 @@ var BLESensorSchema = {
     isActive: Boolean
 };
 
-module.exports = BLESensorSchema;
+module.exports = mongoose.model("bleTags", BLESensorSchema);

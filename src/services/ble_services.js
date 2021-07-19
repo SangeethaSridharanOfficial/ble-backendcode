@@ -1,5 +1,48 @@
-const ApiResponse = require('./api_response');
-const { saveTagInfo, updateTagInfo } = require('./db_methods');
+const ApiResponse = require("../methods/bluetooth/api_response")
+const BleSchema = require("../model/bluetooth/BLESensor")
+
+const saveTagInfo = (reqObj) => {
+    try{
+        return new Promise((resolve, reject) => {
+            console.log('Data to save ', reqObj);
+            var infoInstance = new BleSchema(reqObj);
+
+            infoInstance.save((err) => {
+                if (err) {
+                    console.log('Error');
+                    return reject(new ApiResponse(null, false, 500, 'Database Error!!!'));
+                }
+                console.log('Saved!!!');
+                return resolve(new ApiResponse(null, true))
+            });
+        })
+        
+    }catch(err){
+        console.error('Error in saveTagInfo ', err.stack);
+    }
+    
+}
+
+const updateTagInfo = (reqObj) => {
+    try{
+        return new Promise((resolve, reject) => {
+            console.log('Data to Update ', reqObj);
+            var infoInstance = new BleSchema();
+
+            infoInstance.updateOne({'_id': reqObj._id}, {$set: {'isActive': reqObj.isActive}}, (err) => {
+                if (err) {
+                    console.log('Error');
+                    return reject(new ApiResponse(null, false, 500, 'Database Error!!!'));
+                }
+                console.log('Updated!!!');
+                return resolve(new ApiResponse(null, true))
+            });
+        })
+    }catch(err){
+        console.error('Error in updateTagInfo ', err.stack);
+        reject(err);
+    }
+}
 
 const handleTagInfo = async(reqData) => {
     try{
@@ -22,19 +65,7 @@ const handleTagInfo = async(reqData) => {
     }
 }
 
-const saveBleUserInfo = async(reqData) => {
-    try{
-        // Todo -> Check for emailID
-        await saveUserInfo({
-            '_id': reqData.emailId,
-            'password': reqData.password
-        })
-    }catch(err){
-        console.error('Error in saveBleUserInfo ', err.stack);
-    }
-}
-
-const handleTags = (req, res, next) => {
+const addBLETags = (req, res, next) => {
     try{
         handleTagInfo(req.body).finally(resp => {
             res.status(200).json(resp);
@@ -45,18 +76,10 @@ const handleTags = (req, res, next) => {
     }
 }
 
-const addUser = (req, res, next) => {
-    try{
-        saveBleUserInfo(req.body).finally(resp => {
-            res.status(200).json(resp);
-        })
-    }catch(err){
-        console.error('Error in userInfoApi ', err.stack);
-        next(err);
-    }
-}
-
 module.exports = {
-    handleTags,
-    addUser
+    addBLETags,
+    //addAssetTags,
+    //addVisitors
+    //removeBLETags,
+    //removeAssetTags,
 }

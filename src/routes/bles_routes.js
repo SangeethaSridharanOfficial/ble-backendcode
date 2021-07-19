@@ -3,7 +3,10 @@
 const router = require('express').Router({ mergeParams: true }),
 blesServices = require('../services/ble_services');
 
-router.post('/addTag', blesServices.handleTags);
-router.post('/addUser', blesServices.addUser);
+router.post('/addBLETag', blesServices.addBLETags);
+//router.post('/addAssetTag', blesServices.addAssetTags);
+//router.post('/addVisitors', blesServices.addVisitors);
+//router.post('/removeBLETag', blesServices.removeBLETags);
+//router.post('/removeAssetTag', blesServices.removeAssetTags);
 
 module.exports = router;

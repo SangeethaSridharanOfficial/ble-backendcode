@@ -1,3 +1,5 @@
+const mongoose = require("mongoose");
+
 var AssetTagSchema = {
     _id: String,
     name: String,
@@ -10,4 +12,4 @@ var AssetTagSchema = {
     lastMovement: String
 }
 
-module.exports = AssetTagSchema;
+module.exports = mongoose.model("assetTags", AssetTagSchema);
