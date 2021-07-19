@@ -3,10 +3,16 @@ const MONGOURI = "mongodb+srv://humber:Humber2@cluster0.ahcoq.mongodb.net/BLE_DB
 //const MONGOURI = "mongodb+srv://sheridan:Sheridan1!@cluster0.27ttm.mongodb.net/<dbname>?retryWrites=true&w=majority";
 // const MONGOURI = "mongodb://localhost:27017/myFirstDB";
 // mongod --bind_ip_all
+const BLESensorSchema = require('../model/bleModels/BLESensor');
+const VisitorSchema = require('../model/bleModels/BLEVisitor');
+const AssetSchema = require('../model/bleModels/BLEVisitor');
+
 class InitiateMongoServer{ 
     constructor(){
         this.mongoose = this.createMongoose();
-        this.DeviceSchema = this.deviceSchema();
+        this.BleSchema = this.bleSchema();
+        this.AssetSchema = this.assetSchema();
+        this.VisitorSchema = this.visitorSchema();
     }
 
     async createMongoose(){
@@ -28,16 +34,22 @@ class InitiateMongoServer{
         }
     }
 
-    deviceSchema(){
+    bleSchema(){
         var Schema = mongoose.Schema;
+        var Bles = mongoose.model('bles', new Schema(BLESensorSchema));
+        return Bles;
+    }
 
-        var deviceSchema = new Schema({
-            _id: String,
-            name: String
-        });
+    assetSchema(){
+        var Schema = mongoose.Schema;
+        var Assets = mongoose.model('assetTags', new Schema(AssetSchema));
+        return Assets;
+    }
 
-        var Devices = mongoose.model('Devices', deviceSchema );
-        return Devices;
+    visitorSchema(){
+        var Schema = mongoose.Schema;
+        var Visitors = mongoose.model('visitors', new Schema(VisitorSchema));
+        return Visitors;
     }
 };
 

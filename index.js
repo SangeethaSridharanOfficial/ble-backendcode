@@ -1,6 +1,6 @@
 const express = require('express');
 const usersRoutes = require('./src/routes/users.routes');
-const blesRoutes = require('./src/routes/blesRoutes')
+const blesRoutes = require('./src/routes/bles_routes')
 const bodyParser = require('body-parser');
 
 const app = express();
@@ -13,7 +13,7 @@ app.use(express.json());
 app.use(bodyParser.json());
 
 //Initiate Mongo Server
-const InitiateMongoServer = require("./src/config/dbInit");
+const InitiateMongoServer = require("./src/config/db_init");
 
 app.get("/", (req, res) => {
     res.json({ message: "API Working Cool" });
