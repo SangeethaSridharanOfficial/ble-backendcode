@@ -14,6 +14,7 @@ app.use(bodyParser.json());
 
 //Initiate Mongo Server
 const InitiateMongoServer = require("./src/config/db_init");
+InitiateMongoServer.createMongoose();
 
 app.get("/", (req, res) => {
     res.json({ message: "API Working Cool" });
