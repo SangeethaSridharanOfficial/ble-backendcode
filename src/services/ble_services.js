@@ -1,7 +1,22 @@
 const ApiResponse = require("../methods/bluetooth/api_response")
 const BeaconSchema = require("../model/bluetooth/BLESensor");
 const AssetTagSchema = require('../model/bluetooth/Assettag');
-const { validateTagInfo } = require("../utils/bleHelper");
+
+
+const validateTagInfo = (data, type) => {
+    try{
+        let isValid = true;
+        if(!data) isValid = false;
+
+        if(!data.dId) isValid = false;
+        if(data.toAdd){
+            if(!data.dName || !data.coords) isValid = false;
+        }
+        return {data, isValid};
+    }catch(err){
+        console.error('Error in validateTagInfo ', err.stack);
+    }
+}
 
 const findRecord = (schema, {_id}) => {
     return new Promise((resolve, reject) => {
@@ -185,11 +200,11 @@ const getAllTags = async(req, res, next) => {
         let beaconTags = await BeaconSchema.find({}), allTags = [];
 
         assetTags.forEach(tag => {
-            allTags.push(tag);
+            allTags.push({_id: tag._id, name: tag.name, dType: 'asset', coords: tag.coords});
         })
 
         beaconTags.forEach(tag => {
-            allTags.push(tag);
+            allTags.push({_id: tag._id, name: tag.name, dType: 'beacon', coords: tag.coords});
         })
         console.log('Devices ', allTags);
         res.status(200).json(new ApiResponse(allTags, true));
