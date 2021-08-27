@@ -145,7 +145,8 @@ const addBLETags = (reqData) => {
                 'dId': reqData.dId,
                 'name': reqData.dName,
                 'coords': reqData.coords,
-                'isActive': reqData.toAdd
+                'isActive': reqData.toAdd,
+                'isSpecialDevice': reqData.isSpecialDevice
             }, reqData.dType).then((resp) => {
                 if(resp){
                     return resolve(new ApiResponse(null, true, resp.errCode, resp.msg));
@@ -200,11 +201,11 @@ const getAllTags = async(req, res, next) => {
         let beaconTags = await BeaconSchema.find({}), allTags = [];
 
         assetTags.forEach(tag => {
-            allTags.push({_id: tag._id, name: tag.name, dType: 'asset', coords: tag.coords});
+            allTags.push({_id: tag._id, name: tag.name, dType: 'asset', coords: tag.coords, isSpecialDevice: tag.isSpecialDevice});
         })
 
         beaconTags.forEach(tag => {
-            allTags.push({_id: tag._id, name: tag.name, dType: 'beacon', coords: tag.coords});
+            allTags.push({_id: tag._id, name: tag.name, dType: 'beacon', coords: tag.coords, isSpecialDevice: tag.isSpecialDevice});
         })
         console.log('Devices ', allTags);
         res.status(200).json(new ApiResponse(allTags, true));

@@ -4,6 +4,7 @@ var AssetTagSchema = {
     _id: String,
     name: String,
     coords: String,
+    isSpecialDevice: Boolean,
     temperature: String,
     batteryLevel: String,
     clickNo: Number,
