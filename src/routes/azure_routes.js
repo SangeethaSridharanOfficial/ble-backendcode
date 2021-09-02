@@ -7,7 +7,7 @@ const auth = require("../middleware/auth");
 const { check, validationResult } = require("express-validator/check");
 const User = require("../model/User");
 
-const azureService = require('../services/azure.service');
+const azureService = require('../services/azure_services');
 
 router.get('/AllItems', azureService.getItems);
 
