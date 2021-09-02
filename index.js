@@ -27,8 +27,8 @@ app.use(function(err, req, res, next){
     res.send({theError: err.message});
 })
 
-Port = process.env.PORT || 4000;
-app.listen(Port, (err) => {
+const port = process.env.PORT || 4000;
+app.listen(port, (err) => {
     if (err) throw err
-    console.log(`Server running in http://127.0.0.1: ${Port}`)
+    console.log(`Server running in http://127.0.0.1: ${port}`)
 })

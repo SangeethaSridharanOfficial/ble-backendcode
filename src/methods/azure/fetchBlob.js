@@ -1,9 +1,10 @@
 const { BlobServiceClient } = require("@azure/storage-blob");
-const connStr = "DefaultEndpointsProtocol=https;AccountName=ventilatorblobs;AccountKey=KD6yOeibANuW9PAkl+FbkTEblxYYPufZ133K2E/NEZcqtoBuE2rmjcYesut0Lkki9e2Xnp9eu/xm3FNdWe2D+w==;EndpointSuffix=core.windows.net";
+// const connStr = "DefaultEndpointsProtocol=https;AccountName=ventilatorblobs;AccountKey=KD6yOeibANuW9PAkl+FbkTEblxYYPufZ133K2E/NEZcqtoBuE2rmjcYesut0Lkki9e2Xnp9eu/xm3FNdWe2D+w==;EndpointSuffix=core.windows.net";
+const connStr = "DefaultEndpointsProtocol=https;AccountName=dmblob;AccountKey=XKES7QwjBYPQLxgXE9QuLmiCqD5wq9fufMav3o83L6KE28ux56VHzNgLyMz9aHhxCjQGydRDJWKRmUUCI0zcsQ==;EndpointSuffix=core.windows.net";
 
 const blobServiceClient = BlobServiceClient.fromConnectionString(connStr);
-const containerName = "ventilatorblobc";
-
+// const containerName = "ventilatorblobc";
+const containerName = "dmcontainer";
 
 const fetchBlob = async () => {
     const containerClient = blobServiceClient.getContainerClient(containerName);
