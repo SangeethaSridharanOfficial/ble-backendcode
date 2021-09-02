@@ -1,6 +1,7 @@
 const express = require('express');
-const usersRoutes = require('./src/routes/users.routes');
-const blesRoutes = require('./src/routes/bles_routes')
+const usersRoutes = require('./src/routes/users_routes');
+const blesRoutes = require('./src/routes/bles_routes');
+const azureRoutes = require('./src/routes/azure_routes');
 const bodyParser = require('body-parser');
 
 const app = express();
@@ -22,6 +23,7 @@ app.get("/", (req, res) => {
 
 app.use('/', usersRoutes);
 app.use('/ble', blesRoutes);
+app.use('/azure', azureRoutes);
 
 app.use(function(err, req, res, next){
     res.send({theError: err.message});
