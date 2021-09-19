@@ -1,20 +1,14 @@
 const fetchBlob = require("../methods/azure/fetchBlob")
 const writeDeviceTwin = require("../methods/azure/writeDeviceTwin")
+const ApiResponse = require("../methods/bluetooth/api_response")
 
-
-async function read() {
+async function read(params) {
+    let {id} = params.query;
     sensorValues = await fetchBlob();
-    lastSensorValues = sensorValues[sensorValues.length - 1];
-    
-    data = [
-        {id: 1, temperature: lastSensorValues.temperatureV1, humidity: lastSensorValues.humidityV1, 
-            damper: lastSensorValues.damperV1, presence: lastSensorValues.presenceV1, dateTime: lastSensorValues.DateTime},
-        {id: 2, temperature: 14, humidity: 70, damper: 20, presence: 0, dateTime: lastSensorValues.DateTime},
-        {id: 3, temperature: 30, humidity: 20, damper: 32, presence: 0, dateTime: lastSensorValues.DateTime},
-        {id: 4, temperature: 26, humidity: 41, damper: 55, presence: 0, dateTime: lastSensorValues.DateTime}
-    ];
-    console.log('Sensores: ', data);
-    return data;
+    // lastSensorValues = sensorValues[sensorValues.length - 1];
+    res = sensorValues.filter(val => Object.keys(val).indexOf(id.toLowerCase()) !== -1).pop()[id.toLowerCase()];
+
+    return new ApiResponse(res, true);
 }
 setpoints = [{id: 1}, {id: 2}, {id: 3}, {id: 4}];
 
@@ -25,7 +19,7 @@ module.exports = {
     },
 
     getLastItem: async (req, res) => {
-        data = await read();
+        data = await read(req);
         return res.status(200).send(data);
     },
 
