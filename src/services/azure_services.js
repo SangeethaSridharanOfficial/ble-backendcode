@@ -6,7 +6,10 @@ async function read(params) {
     let {id} = params.query;
     sensorValues = await fetchBlob();
     // lastSensorValues = sensorValues[sensorValues.length - 1];
-    res = sensorValues.filter(val => Object.keys(val).indexOf(id.toLowerCase()) !== -1).pop()[id.toLowerCase()];
+    let res = sensorValues.filter(val => Object.keys(val).indexOf(id.toLowerCase()) !== -1).pop();
+    if(res)
+        res = res[id.toLowerCase()];
+    
 
     return new ApiResponse(res, true);
 }
