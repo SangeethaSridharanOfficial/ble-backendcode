@@ -7,11 +7,13 @@ async function read(params) {
     sensorValues = await fetchBlob();
     // lastSensorValues = sensorValues[sensorValues.length - 1];
     let res = sensorValues.filter(val => Object.keys(val).indexOf(id.toLowerCase()) !== -1).pop();
-    if(res)
-        res = res[id.toLowerCase()];
+    let respObj = {}
+    if(res){
+        respObj['timestamp'] = res['timestamp'];
+        respObj = {...respObj, ...res[id.toLowerCase()]}
+    }
     
-
-    return new ApiResponse(res, true);
+    return new ApiResponse(respObj, true);
 }
 setpoints = [{id: 1}, {id: 2}, {id: 3}, {id: 4}];
 
