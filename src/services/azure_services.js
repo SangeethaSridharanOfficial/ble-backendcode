@@ -15,6 +15,24 @@ async function read(params) {
     
     return new ApiResponse(respObj, true);
 }
+
+const getTrends = async(params) => {
+    try{
+        let {id} = params.query;
+        sensorValues = await fetchBlob();
+        let res = sensorValues.filter(val => Object.keys(val).indexOf(id.toLowerCase()) !== -1);
+        let respObj = [];
+
+        res.forEach(data => {
+            respObj.push({timestamp: data['timestamp'], ...data[id.toLowerCase()]})
+        });
+
+        return new ApiResponse(respObj, true);
+    }catch(err){
+        console.error('Error in getTrends ', err.stack);
+    }
+}
+
 setpoints = [{id: 1}, {id: 2}, {id: 3}, {id: 4}];
 
 module.exports = {
@@ -46,4 +64,9 @@ module.exports = {
         }
         return res.status(200).send(setpOneRoom);
     },
+
+    getTempTrends: async (req, res) => {
+        trendsData = await getTrends(req);
+        return res.status(200).send(trendsData)
+    }
 }

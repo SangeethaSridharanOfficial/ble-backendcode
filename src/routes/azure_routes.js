@@ -17,4 +17,5 @@ router.get('/Setpoints', azureService.getSetpoints);
 
 router.put('/Setpoints/:id', azureService.updateSetpoints);
 
+router.get('/Temperature/trends', azureService.getTempTrends);
 module.exports = router;
