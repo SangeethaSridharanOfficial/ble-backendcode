@@ -33,6 +33,23 @@ const getTrends = async(params) => {
     }
 }
 
+const fetchLocations = async(params) => {
+    try{
+        assetValues = await fetchBlob();
+        let {id} = params.query,
+        res = assetValues.filter(val => Object.keys(val).indexOf(id.toLowerCase()) !== -1),
+        respObj = [];
+
+        res.forEach(data => {
+            respObj.push(data[id.toLowerCase()])
+        });
+
+        return new ApiResponse(respObj, true);
+    }catch(err){
+        console.error('Error in fetchLocations ', err);
+    }
+}
+
 setpoints = [{id: 1}, {id: 2}, {id: 3}, {id: 4}];
 
 module.exports = {
@@ -68,5 +85,10 @@ module.exports = {
     getTempTrends: async (req, res) => {
         trendsData = await getTrends(req);
         return res.status(200).send(trendsData)
+    },
+
+    getAssetLocations: async (req, res) => {
+        locData = await fetchLocations(req);
+        return res.status(200).send(locData)
     }
 }
