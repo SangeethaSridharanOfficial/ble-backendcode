@@ -52,12 +52,12 @@ const fetchLocations = async(params) => {
 
 const getAssetsLocations = async(req) => {
     try{
-        console.log("assets ", req.body);
         assetValues = await fetchBlob();
         let respObj = [];
 
         req.body.assetIds.forEach(id => {
             res = assetValues.filter(val => Object.keys(val).indexOf(id.toLowerCase()) !== -1).pop();
+            res = res[id.toLowerCase()];
             respObj.push(res);
         })
 
