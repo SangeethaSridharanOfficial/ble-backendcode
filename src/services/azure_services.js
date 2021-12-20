@@ -50,6 +50,23 @@ const fetchLocations = async(params) => {
     }
 }
 
+const getAssetsLocations = async(req) => {
+    try{
+        console.log("assets ", req.body);
+        assetValues = await fetchBlob();
+        let respObj = [];
+
+        req.body.assetIds.forEach(id => {
+            res = assetValues.filter(val => Object.keys(val).indexOf(id.toLowerCase()) !== -1).pop();
+            respObj.push(res);
+        })
+
+        return new ApiResponse(respObj, true);
+    }catch(err){
+        console.error('Error in getAssetsLocations ', err);
+    }
+}
+
 setpoints = [{id: 1}, {id: 2}, {id: 3}, {id: 4}];
 
 module.exports = {
@@ -89,6 +106,11 @@ module.exports = {
 
     getAssetLocations: async (req, res) => {
         locData = await fetchLocations(req);
+        return res.status(200).send(locData)
+    },
+
+    fetchAssetsLocations: async(req,  res) => {
+        locData = await getAssetsLocations(req);
         return res.status(200).send(locData)
     }
 }

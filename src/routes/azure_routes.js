@@ -20,4 +20,6 @@ router.put('/Setpoints/:id', azureService.updateSetpoints);
 router.get('/Temperature/trends', azureService.getTempTrends);
 
 router.get('/location/asset', azureService.getAssetLocations);
+
+router.post('/location/assetsloc', azureService.fetchAssetsLocations);
 module.exports = router;
