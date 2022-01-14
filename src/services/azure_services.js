@@ -51,19 +51,27 @@ const fetchLocations = async(params) => {
 }
 
 const getAssetsLocations = async(req) => {
+    let respObj = [];
     try{
         assetValues = await fetchBlob();
-        let respObj = [];
-
+        
         req.body.assetIds.forEach(id => {
             res = assetValues.filter(val => Object.keys(val).indexOf(id.toLowerCase()) !== -1).pop();
-            res = res[id.toLowerCase()];
-            respObj.push(res);
+            
+            if( res ){
+                res = res[id.toLowerCase()];
+                respObj.push(res);
+            }
         })
-
+        // if(respObj.length === req.body.assetIds.length){
         return new ApiResponse(respObj, true);
+        // }else{
+        //     return new ApiResponse([], true);
+        // }
+        
     }catch(err){
         console.error('Error in getAssetsLocations ', err);
+        return new ApiResponse(respObj, true);
     }
 }
 
