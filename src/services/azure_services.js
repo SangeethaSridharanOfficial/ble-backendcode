@@ -60,7 +60,7 @@ const getAssetsLocations = async(req) => {
             
             if( res ){
                 res = res[id.toLowerCase()];
-                res[id] = id;
+                res['id'] = id;
                 respObj.push(res);
             }
         })
